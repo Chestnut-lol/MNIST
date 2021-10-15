@@ -7,6 +7,10 @@ def project_onto_PC(X, pcs, n_components, feature_means):
     Given principal component vectors pcs = principal_components(X)
     this function returns a new data array in which each sample in X
     has been projected onto the first n_components principcal components.
+    X : n x d
+    pcs: full principle component matrix of shape d x k
+    n_components = k
+    feature_means = features mean computed from the training data
     """
     # TODO: first center data using the feature_means
     # TODO: Return the projection of the centered dataset
@@ -16,8 +20,12 @@ def project_onto_PC(X, pcs, n_components, feature_means):
     #       of the eigenvectors returned by principal_components().
     #       Note that each eigenvector is already be a unit-vector,
     #       so the projection may be done using matrix multiplication.
-    raise NotImplementedError
-
+    return (X-feature_means)@pcs[:,:n_components]
+    # Why do we need to input feature_means rather than calculating it directly from X?
+    # we only use the training dataset to determine the principal components. 
+    # It is improper to use the test dataset for anything except evaluating the accuracy of our predictive model. 
+    # If the test data is used for other purposes such as selecting good features, 
+    # it is possible to overfit the test set and obtain overconfident estimates of a model's performance.
 
 ### Functions which are already complete, for you to use ###
 
